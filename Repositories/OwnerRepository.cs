@@ -7,11 +7,11 @@ namespace DogGo.Repositories
 {
     public class OwnerRepository : IOwnerRepository
     {
-        private readonly IConfiguration _config; 
+        private readonly IConfiguration _config;
 
         public OwnerRepository(IConfiguration config)
         {
-            _config = config; 
+            _config = config;
         }
 
         public SqlConnection Connection
@@ -21,7 +21,7 @@ namespace DogGo.Repositories
                 return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
             }
         }
-        //fix this soon 
+
         public List<Owner> GetAllOwners()
         {
             using (SqlConnection conn = Connection)
