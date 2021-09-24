@@ -11,6 +11,14 @@ namespace DogGo.Controllers
 {
     public class OwnersController : Controller
     {
+        private readonly IOwnerRepository _ownerRepo;
+
+        // ASP.NET will give us an instance of our Walker Repository. This is called "Dependency Injection"
+        public OwnersController(IOwnerRepository ownerRepository)
+        {
+            _ownerRepo = ownerRepository;
+        }
+
         public ActionResult Index()
         {
             List<Owner> owners = _ownerRepo.GetAllOwners();
@@ -85,13 +93,6 @@ namespace DogGo.Controllers
             {
                 return View();
             }
-        }
-
-        private readonly IOwnerRepository _ownerRepo;
-
-        public OwnersController(IOwnerRepository ownerRepository)
-        {
-            _ownerRepo = ownerRepository;
         }
     }
 }
