@@ -43,17 +43,20 @@ namespace DogGo.Controllers
             return View();
         }
 
+        // POST: Owners/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Owner owner)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _ownerRepo.AddOwner(owner);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(owner);
             }
         }
 
@@ -76,9 +79,12 @@ namespace DogGo.Controllers
             }
         }
 
+        // GET: Owners/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Owner owner = _ownerRepo.GetOwnerById(id);
+
+            return View(owner);
         }
 
         [HttpPost]
